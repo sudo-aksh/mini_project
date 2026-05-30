@@ -23,6 +23,8 @@ VALUES(?,?,?,?)
 """,
 (id,name,class_,email))
     
+    conn.commit()
+    
 def view_all():
     conn = sqlite3.connect("database.db")
 
@@ -47,3 +49,15 @@ def view_by_class():
 
     for row in rows:
         print(row)
+
+def delete_student():
+    conn = sqlite3.connect("database.db")
+
+    curr = conn.cursor()
+
+    id_ = int(input("enter the id of the student you want o delete: "))
+
+    curr.execute(f"""DELETE FROM students 
+                 WHERE id = {id_}""")
+    
+    conn.commit()
