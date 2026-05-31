@@ -1,77 +1,131 @@
 import sqlite3
 
 def add_student():
-    conn = sqlite3.connect("database.db")
 
-    curr = conn.cursor()
+    ans = input("""are you confirm with your action?
+enter OK of ok for yes, else type anoythong else : """)
 
-    id = int(input("enter a uniqe id for the student: "))
-    name = input("enter the name of the stduent: ")
-    while True:
-        class_ = int(input("enter the class of the student:  "))
-        if 4<class_ <11:
-            break
-        else:
-            print("enter class between 5 and 10")
+    if ans not in ("OK","ok"):
+        return
+    else:
 
-    email = input("enter email for the student: ")
-    
+        conn = sqlite3.connect("database.db")
 
-    curr.execute(f"""
-INSERT INTO students(id,name,class,email)
-VALUES(?,?,?,?)
-""",
-(id,name,class_,email))
-    
-    conn.commit()
+        curr = conn.cursor()
+
+        id = int(input("enter a uniqe id for the student: "))
+        name = input("enter the name of the stduent: ")
+        while True:
+            class_ = int(input("enter the class of the student:  "))
+            if 4<class_ <11:
+                break
+            else:
+                print("enter class between 5 and 10")
+
+        email = input("enter email for the student: ")
+        
+
+        curr.execute(f"""
+    INSERT INTO students(id,name,class,email)
+    VALUES(?,?,?,?)
+    """,
+    (id,name,class_,email))
+        
+        conn.commit()
     
 def view_all():
-    conn = sqlite3.connect("database.db")
+    ans = input("""are you confirm with your action?
+enter OK of ok for yes, else type anoythong else : """)
 
-    curr = conn.cursor()
+    if ans not in ("OK","ok"):
+        return
+    else:
 
-    curr.execute("SELECT * FROM students")
-    rows = curr.fetchall()
+        conn = sqlite3.connect("database.db")
 
-    for row in rows:
-        print(row)
+        curr = conn.cursor()
+
+        curr.execute("SELECT * FROM students")
+        rows = curr.fetchall()
+
+        for row in rows:
+            print(row)
 
 def view_by_class():
-    conn = sqlite3.connect("database.db")
+    ans = input("""are you confirm with your action?
+enter OK of ok for yes, else type anoythong else : """)
 
-    curr = conn.cursor()
-    get_class = int(input("enter the class to veiw all studets of the class:  "))
+    if ans not in ("OK","ok"):
+        return
+    else:
 
-    curr.execute(f"""SELECT * FROM students
-                 WHERE class = {get_class}""")
-    
-    rows = curr.fetchall()
+        conn = sqlite3.connect("database.db")
 
-    for row in rows:
-        print(row)
+        curr = conn.cursor()
+
+        while True:
+            class_ = int(input("enter the class of the student:  "))
+            if 4<class_ <11:
+                break
+            else:
+                print("enter class between 5 and 10")
+
+        curr.execute(f"""SELECT * FROM students
+                    WHERE class = {class_}""")
+        
+        rows = curr.fetchall()
+
+        for row in rows:
+            print(row)
 
 def delete_student():
-    conn = sqlite3.connect("database.db")
+    ans = input("""are you confirm with your action?
+enter OK of ok for yes, else type anoythong else : """)
 
-    curr = conn.cursor()
+    if ans not in ("OK","ok"):
+        return
+    else:
 
-    id_ = int(input("enter the id of the student you want o delete: "))
+        conn = sqlite3.connect("database.db")
 
-    curr.execute(f"""DELETE FROM students 
-                 WHERE id = {id_}""")
-    
-    conn.commit()
+        curr = conn.cursor()
+
+        id_ = int(input("enter the id of the student you want o delete: "))
+
+        curr.execute(f"""DELETE FROM students 
+                    WHERE id = {id_}""")
+        
+        conn.commit()
 
 def update_student():
+    ans = input("""are you confirm with your action?
+enter OK of ok for yes, else type anoythong else : """)
 
-    conn = sqlite3.connect("database.db")
+    if ans not in ("OK","ok"):
+        return
+    else:
 
-    curr = conn.cursor()
+        conn = sqlite3.connect("database.db")
 
-    conn.execute(f"""
-UPDATE students
-SET name= ?, class = ?,email = ?
-WHERE = ?"""
-())
+        curr = conn.cursor()
 
-    conn.commit()
+        id = int(input("enter id of the student:"))
+
+        name = input("enter the name:")
+
+        while True:
+            class_ = int(input("enter the class of the student:  "))
+            if 4<class_ <11:
+                break
+            else:
+                print("enter class between 5 and 10")
+
+        email = input("enter email for the student:")
+
+        conn.execute(f"""
+    UPDATE students
+    SET name= ?, class = ?,email = ?
+    WHERE id = ?""",
+    (name,class_,email,id))
+
+        conn.commit()

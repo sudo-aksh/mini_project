@@ -20,7 +20,7 @@ while True:
     elif get == 2:
         view_all()
     elif get ==3:
-        view_by_class
+        view_by_class()
     elif get == 4:
         delete_student()
     elif get == 5:
