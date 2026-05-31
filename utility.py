@@ -61,3 +61,17 @@ def delete_student():
                  WHERE id = {id_}""")
     
     conn.commit()
+
+def update_student():
+
+    conn = sqlite3.connect("database.db")
+
+    curr = conn.cursor()
+
+    conn.execute(f"""
+UPDATE students
+SET name= ?, class = ?,email = ?
+WHERE = ?"""
+())
+
+    conn.commit()
