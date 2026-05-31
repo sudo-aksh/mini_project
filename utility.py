@@ -31,7 +31,7 @@ def view_all():
     curr = conn.cursor()
 
     curr.execute("SELECT * FROM students")
-    rows = curr.fecthall()
+    rows = curr.fetchall()
 
     for row in rows:
         print(row)
@@ -45,7 +45,7 @@ def view_by_class():
     curr.execute(f"""SELECT * FROM students
                  WHERE class = {get_class}""")
     
-    rows = curr.fecthall()
+    rows = curr.fetchall()
 
     for row in rows:
         print(row)

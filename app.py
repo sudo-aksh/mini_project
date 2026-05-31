@@ -6,11 +6,14 @@ def set_database():
     curr = conn.cursor()
 
 
-    curr.execute(f"""CREATE TABLE IF NOT EXISTS students
-    (id INTEGER PRIMANRY KEY,
-    name TEXT NOT NULL,
-    class INTEGER NOT NULL CHECK,
-    email TEXT UNIQUE NOT NULL)""")
+    curr.execute(f"""
+    CREATE TABLE IF NOT EXISTS students
+        (id INTEGER PRIMARY KEY,
+        name TEXT NOT NULL,
+        class INTEGER NOT NULL ,
+        email TEXT UNIQUE NOT NULL
+    )
+    """)
 
     conn.commit()
     conn.close()
